@@ -38,7 +38,7 @@ def shift_letter(letter, shift):
     # Replace `pass` with your code.
     # Stay within the function. Only use the parameters as input. The function should return your answer.
     if letter == " ":
-        print (" ")
+        return (" ")
     else:
         letter_num = ord(letter) - ord('A') +1 + shift
         if letter_num <=26:
@@ -113,7 +113,7 @@ def shift_by_letter(letter, letter_shift):
     # Replace `pass` with your code.
     # Stay within the function. Only use the parameters as input. The function should return your answer.
     if letter == " ":
-        print(" ")
+        return(" ")
     else:
         letter_num = ord(letter) - ord('A') + (ord(letter_shift) - ord('A'))
         if letter_num <= 25:

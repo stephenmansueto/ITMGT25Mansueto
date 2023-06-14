@@ -10,8 +10,8 @@ def scytale_decipher(message, shift):
     pass
 
 
-message = "TNRHFTEOHQXEUJLIUACMZKPYBSDROOOVGWE_"
-shift = 3
+message = "TIMHYZ_ANOE_O_NA_PDN_G_JOI__"
+shift = 7
 column_num = 0
 index = 0
 acc=""
