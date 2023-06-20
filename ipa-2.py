@@ -40,11 +40,11 @@ def shift_letter(letter, shift):
     if letter == " ":
         return (" ")
     else:
-        letter_num = ord(letter) - ord('A') +1 + shift
+        letter_num = ord(letter) - ord('A') + (shift % 26)
         if letter_num <=26:
-            newletter = chr(letter_num + ord('A') -1)
+            newletter = chr(letter_num + ord('A'))
         else:
-             newletter = chr(letter_num + ord('A') -27)
+            newletter = chr(letter_num + ord('A') - (25 * shift//26))
     return(newletter)
 
 def caesar_cipher(message, shift):
@@ -71,16 +71,17 @@ def caesar_cipher(message, shift):
     alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
     #Hi sir! Just added lowercase letters and took into account other symbols (!, ., ?, etc. just to make the code more universal.
     #hope this is okay lang po!
+    acc = ""
     for letter in message:
-        if letter not in alphabet:
-            acc += letter
+        if letter == " ":
+            acc+=" "
         else:
-            letter_num = ord(letter) - ord('A') +1 + shift
-            if letter_num <=26:
-                new_word = chr(letter_num + ord('A') - 1)
+            letter_num = ord(letter) - ord('A') + (shift % 26)
+            if letter_num <= 26:
+                new_word = chr(letter_num + ord('A'))
                 acc += new_word
             else:
-                new_word = chr(letter_num + ord('A') - 1)
+                new_word = chr(letter_num + ord('A') - (25 * shift//26))
                 acc += new_word
     return(acc)
 
