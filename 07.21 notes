@@ -1,0 +1,51 @@
+WORKING WITH DATA
+
+Tools
+    data types
+    conditionals
+    loops
+    functions
+
+today we look at how tools are normally used to analyze / manipulate data
+python is powerful but most people are ME (so we gotta work with lots of data in 3rd and 4th year)
+
+DATA MAPPING
+    most of the time, there's no direct tool you can use to map 
+    you just do this to a set of data (anything that's not atomic is a set and can therefore be mapped)
+    DEFINITION
+        given a collection, produce a second collection where each element is a TRANSFORMATION of the elements in the first
+    example:
+        L = [1,2,3,4,5]
+        if we want to turn this into a list of squares
+        L2 = [1,4,9,16,25]
+        you can:
+            create an empty list
+            use a for loop to square the numbers
+            append them to the list!
+            elements here included the orginal collection, an iteration of the collection, then transformation, then adding to a second collection
+        BUT YOU CAN ALSO USE THE MAP FUNCTION:
+
+LIST COMPREHENSION
+    L = [1,2,3,4,5]
+    [x ** 2 for x in l]
+
+FILTERING
+    you usually define a function outside and then just use them in the filter 
+
+
+There are built-in functions for map and filter 
+    you can use this, just define your function and collection, then use the functions na
+    you can pass functions to other functions
+
+REDUCTION / REDUCE
+    reducing a collection to an atomic value
+    will only produce one atomic value, also called aggregation
+    example: getting the sum from a list 
+        e.g. my_sum = 0
+        for num in l:
+            my_sum +=num 
+        ^^THAT ABOVE IS ALREADY A FORM OF REDUCTION 
+    python doesn't have a function for reduce
+        e.g. def reduce (acc, next)
+        return acc+next
+
