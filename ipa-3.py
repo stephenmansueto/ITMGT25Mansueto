@@ -82,7 +82,53 @@ def tic_tac_toe(board):
     '''
     # Replace `pass` with your code.
     # Stay within the function. Only use the parameters as input. The function should return your answer.
-    pass
+    row = 0
+    column = 0
+    diagonal = 0
+    x = 0
+    y = len(board)-1
+    l = []
+    l2 =[]
+    l3 = []
+    vertical_board = list(zip(*board))
+
+    #this is to check if there's a tic-tac-toe in the rows
+    while row != len(board):
+        if all(item == board[row][0] for item in board[row][0:len(board)]):
+            l.append(board[row][0])
+        row+=1
+
+    #this is to check if there's a tic-tac-toe in the columns
+    while column != len(board):
+        if all(item == vertical_board[column][0] for item in vertical_board[column][0:len(board)]):
+            l.append(vertical_board[column][0])
+        column+=1
+
+    #this is to check a tic-tac-toe in the diagonals
+    while diagonal != len(board):
+        l2.append(board[diagonal][diagonal])
+        diagonal+=1
+
+    #if there's a tic-tac-toe, the diagonal will be appended into the original list
+    if all(item == l2[0] for item in l2):
+        l.append(l2[0])
+
+    #this is to check the OTHER diagonal
+    while x != len(board):
+        l3.append(board[x][y])
+        x += 1
+        y -= 1
+
+    if all(item == l3[0] for item in l3):
+        l.append(l3[0])
+
+    if l == [] or l == ['']:
+        winner = "NO WINNER"
+
+    else:
+        winner = l[0]
+
+    return winner
 
 def eta(first_stop, second_stop, route_map):
     '''ETA.
@@ -115,4 +161,25 @@ def eta(first_stop, second_stop, route_map):
     '''
     # Replace `pass` with your code.
     # Stay within the function. Only use the parameters as input. The function should return your answer.
-    pass
+    acc = 0
+    if (first_stop, second_stop) in route_map:
+        acc = int(route_map[first_stop, second_stop]['travel_time_mins'])
+    elif first_stop == second_stop:
+        acc+= 0
+    else:
+        route_list = list(route_map.keys())
+        index = 0
+        indexb = 0
+        for key in route_map:
+            if first_stop in route_list[index][0]:
+                break
+            index+=1
+        for key in route_map:
+            if second_stop in route_list[indexb][1]:
+                acc+= int(route_map[key]['travel_time_mins'])
+                break
+            indexb+= 1
+        while index!=indexb:
+            acc+= int(route_map[route_list[index]]['travel_time_mins'])
+            index+=1
+    return acc
