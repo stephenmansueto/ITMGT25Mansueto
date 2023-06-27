@@ -45,10 +45,10 @@ def relationship_status(from_member, to_member, social_graph):
         r_stat = "friends"
 
     elif to_member in social_graph[from_member]["following"]:
-        r_stat = "followed by"
+        r_stat = "follower"
 
     elif from_member in social_graph[to_member]["following"]:
-        r_stat = "follower"
+        r_stat = "followed by"
 
     else:
         r_stat = "no relationship"
@@ -94,13 +94,13 @@ def tic_tac_toe(board):
 
     #this is to check if there's a tic-tac-toe in the rows
     while row != len(board):
-        if all(item == board[row][0] for item in board[row][0:len(board)]):
+        if all(item == board[row][0] and item != '' for item in board[row][0:len(board)]):
             l.append(board[row][0])
         row+=1
 
     #this is to check if there's a tic-tac-toe in the columns
     while column != len(board):
-        if all(item == vertical_board[column][0] for item in vertical_board[column][0:len(board)]):
+        if all(item == vertical_board[column][0] and item != '' for item in vertical_board[column][0:len(board)]):
             l.append(vertical_board[column][0])
         column+=1
 
@@ -122,13 +122,14 @@ def tic_tac_toe(board):
     if all(item == l3[0] for item in l3):
         l.append(l3[0])
 
-    if l == [] or l == ['']:
+    if ('' in l and "X" not in l and "O" not in l) or l == []:
         winner = "NO WINNER"
 
     else:
         winner = l[0]
 
     return winner
+
 
 def eta(first_stop, second_stop, route_map):
     '''ETA.
@@ -164,22 +165,40 @@ def eta(first_stop, second_stop, route_map):
     acc = 0
     if (first_stop, second_stop) in route_map:
         acc = int(route_map[first_stop, second_stop]['travel_time_mins'])
+    #if the first stop is the same as the second stop, then there's no travel time
     elif first_stop == second_stop:
         acc+= 0
+    #what if there are in-betweens?
     else:
         route_list = list(route_map.keys())
         index = 0
         indexb = 0
+        #the code below basically accumulates the value of the first and second stop. The while loop accounts for in-betweens
         for key in route_map:
             if first_stop in route_list[index][0]:
-                break
+                if index>indexb or index == indexb:
+                    acc+= int(route_map[key]['travel_time_mins'])
+                    break
+                else:
+                    break
             index+=1
         for key in route_map:
             if second_stop in route_list[indexb][1]:
                 acc+= int(route_map[key]['travel_time_mins'])
                 break
             indexb+= 1
-        while index!=indexb:
-            acc+= int(route_map[route_list[index]]['travel_time_mins'])
+        if index<indexb:
             index+=1
+            while index!=indexb:
+                acc+= int(route_map[route_list[index]]['travel_time_mins'])
+                index+=1
+        elif indexb<index:
+            index+=1
+            while index!= len(route_map):
+                acc+= int(route_map[route_list[index]]['travel_time_mins'])
+                index+=1
+            indexb = 0
+            while second_stop not in route_list[indexb][1]:
+                acc+= int(route_map[route_list[indexb]]['travel_time_mins'])
+                indexb+=1
     return acc

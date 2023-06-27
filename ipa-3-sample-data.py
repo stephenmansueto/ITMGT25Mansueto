@@ -45,7 +45,7 @@ Sample data for Tic Tac Toe below:
 '''
 
 board1 = [
-['X','X','O'],
+['X','X',' '],
 ['O','X','O'],
 ['O','','X'],
 ]
